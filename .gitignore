@@ -1,12 +1,21 @@
-*.class
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# /
+/.idea
+/.project
+/.settings
+/*.iml
 
-# Package Files #
-*.jar
-*.war
-*.ear
+/target
+# /client1/
+/client1/*.iml
+/client1/.classpath
+/client1/.project
+/client1/.settings
+/client1/target
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# /authentication-server/
+/authentication-server/*.iml
+/authentication-server/.classpath
+/authentication-server/.project
+/authentication-server/.settings
+/authentication-server/target
