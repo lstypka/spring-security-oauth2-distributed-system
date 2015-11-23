@@ -2,7 +2,8 @@
 
 This is a simple springBoot project consists of two RESTful web-services (authentication-service and client1).
 Authorisation service generates JWT based session tokens  [https://en.wikipedia.org/wiki/JSON_Web_Token](https://en.wikipedia.org/wiki/JSON_Web_Token)
-The second web-service has two endpoints (/client1/time and /client1/user). Both of them are secured, therefore access to them is possible only with session token header `curl http://localhost:8075/client1/user -H "Content-Type: application/json" -H "Authorization: Bearer ==HERE_YOUR_TOKEN==`
+The second web-service has two endpoints (/client1/time and /client1/user). Both of them are secured, therefore access to them is possible only with session token header 
+`curl http://localhost:8075/client1/user -H "Content-Type: application/json" -H "Authorization: Bearer ==HERE_YOUR_TOKEN==`
 
 How to generate keystore and public key
 __Generating keystore__
