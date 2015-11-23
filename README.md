@@ -1,5 +1,7 @@
 # Spring Boot JWT OAuth2
 
+
+How to generate keystore and public key
 __Generating keystore__
 
 `keytool -genkeypair -alias authorization-server -keyalg RSA -keypass lstypkaSecretPassword -keystore authorizationServer.jks -storepass lstypkaSecretPassword`
@@ -12,7 +14,7 @@ __Generating public key__
 
 __Generating session token__
 
-`curl -u client1ResourceId: http://localhost:8091/uaa/oauth/token -d "grant_type=password&username=admin&password=s3cr3t"`
+`curl -u client1ResourceId: http://localhost:8091/authorization-server/oauth/token -d "grant_type=password&username=admin&password=s3cr3t"`
 
 Expected response
 
@@ -37,10 +39,10 @@ vB1UJ0qqJXWI3UdbQlrFqbPz9AoTiZYjaUoZCw","expires_in":5999,"scope":"read write tr
 ust","jti":"b3c8684a-1f96-4b4c-b84f-ee41548f0be6"}
 ```
 
-Copy value of "access_token" and invoke client1 endpoint (http://localhost:8075/time)
+Copy value of "access_token" and invoke client1 endpoint (http://localhost:8075/client1/time)
 
 ```
-curl http://localhost:8075/time -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NDgzMTY2NzgsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiJiM2M4Njg0YS0xZjk2LTRiNGMtYjg0Zi1lZTQxNTQ4ZjBiZTYiLCJjbGllbnRfaWQiOiJjbGllbnQxUmVzb3VyY2VJZCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSIsInRydXN0Il19.BJrspOdDvKigdU_Ri-nHv0w-Cj691UNnvhftb3Yd1eQgY6Xq5iuqsSw9yBjGqnpTbQg_AFGhGTwoHuyLyvv3KU_BfmnqytgBZaoZckATVbE2FlETnU1Lu0jId9OXheUCGAeV1kMGDAxz6RDZvjeVnCOASvNwmuM6P4ow5Y7DsI9fSCARAgsBCHgypvQ4Rsb-eR9o2-ETl3RU-iwrb6Ha3oY9xRxrN4GuOgfyuvJHxIWahRr3ZbvIMIude-snVUxcihMjtPDhaQov-d5T8ZCtTLqQhgR-NQJS-_XnFQK6lNmN_UbKsmwWcuoBIv1U4hepMJTx9aA9aJv-lDWAeA9glg"
+curl http://localhost:8075/client1/time -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NDgzMTY2NzgsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiJiM2M4Njg0YS0xZjk2LTRiNGMtYjg0Zi1lZTQxNTQ4ZjBiZTYiLCJjbGllbnRfaWQiOiJjbGllbnQxUmVzb3VyY2VJZCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSIsInRydXN0Il19.BJrspOdDvKigdU_Ri-nHv0w-Cj691UNnvhftb3Yd1eQgY6Xq5iuqsSw9yBjGqnpTbQg_AFGhGTwoHuyLyvv3KU_BfmnqytgBZaoZckATVbE2FlETnU1Lu0jId9OXheUCGAeV1kMGDAxz6RDZvjeVnCOASvNwmuM6P4ow5Y7DsI9fSCARAgsBCHgypvQ4Rsb-eR9o2-ETl3RU-iwrb6Ha3oY9xRxrN4GuOgfyuvJHxIWahRr3ZbvIMIude-snVUxcihMjtPDhaQov-d5T8ZCtTLqQhgR-NQJS-_XnFQK6lNmN_UbKsmwWcuoBIv1U4hepMJTx9aA9aJv-lDWAeA9glg"
 ```
 
 Expected result:
@@ -50,7 +52,7 @@ Expected result:
 Get details of logged user:
 
 ```
-curl http://localhost:8075/user -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NDgzMTY2NzgsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiJiM2M4Njg0YS0xZjk2LTRiNGMtYjg0Zi1lZTQxNTQ4ZjBiZTYiLCJjbGllbnRfaWQiOiJjbGllbnQxUmVzb3VyY2VJZCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSIsInRydXN0Il19.BJrspOdDvKigdU_Ri-nHv0w-Cj691UNnvhftb3Yd1eQgY6Xq5iuqsSw9yBjGqnpTbQg_AFGhGTwoHuyLyvv3KU_BfmnqytgBZaoZckATVbE2FlETnU1Lu0jId9OXheUCGAeV1kMGDAxz6RDZvjeVnCOASvNwmuM6P4ow5Y7DsI9fSCARAgsBCHgypvQ4Rsb-eR9o2-ETl3RU-iwrb6Ha3oY9xRxrN4GuOgfyuvJHxIWahRr3ZbvIMIude-snVUxcihMjtPDhaQov-d5T8ZCtTLqQhgR-NQJS-_XnFQK6lNmN_UbKsmwWcuoBIv1U4hepMJTx9aA9aJv-lDWAeA9glg" 
+curl http://localhost:8075/client1/user -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0NDgzMTY2NzgsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiJiM2M4Njg0YS0xZjk2LTRiNGMtYjg0Zi1lZTQxNTQ4ZjBiZTYiLCJjbGllbnRfaWQiOiJjbGllbnQxUmVzb3VyY2VJZCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSIsInRydXN0Il19.BJrspOdDvKigdU_Ri-nHv0w-Cj691UNnvhftb3Yd1eQgY6Xq5iuqsSw9yBjGqnpTbQg_AFGhGTwoHuyLyvv3KU_BfmnqytgBZaoZckATVbE2FlETnU1Lu0jId9OXheUCGAeV1kMGDAxz6RDZvjeVnCOASvNwmuM6P4ow5Y7DsI9fSCARAgsBCHgypvQ4Rsb-eR9o2-ETl3RU-iwrb6Ha3oY9xRxrN4GuOgfyuvJHxIWahRr3ZbvIMIude-snVUxcihMjtPDhaQov-d5T8ZCtTLqQhgR-NQJS-_XnFQK6lNmN_UbKsmwWcuoBIv1U4hepMJTx9aA9aJv-lDWAeA9glg" 
 ```
 
 Expected result:
