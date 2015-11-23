@@ -1,20 +1,23 @@
 # Spring Boot JWT OAuth2
 
+This is a simple springBoot project consists of two RESTful web-services (authentication-service and client1).
+Authorisation service generates JWT based session tokens  [https://en.wikipedia.org/wiki/JSON_Web_Token](https://en.wikipedia.org/wiki/JSON_Web_Token)
+The second web-service has two endpoints (/client1/time and /client1/user). Both of them are secured, therefore access to them is possible only with session token header `curl http://localhost:8075/client1/user -H "Content-Type: application/json" -H "Authorization: Bearer ==HERE_YOUR_TOKEN==`
 
 How to generate keystore and public key
 __Generating keystore__
 
-`keytool -genkeypair -alias authorization-server -keyalg RSA -keypass lstypkaSecretPassword -keystore authorizationServer.jks -storepass lstypkaSecretPassword`
+`keytool -genkeypair -alias authentication-server -keyalg RSA -keypass lstypkaSecretPassword -keystore authenticationServer.jks -storepass lstypkaSecretPassword`
 
 __Generating public key__
 
-`keytool -list -rfc --keystore authorizationServer.jks | openssl x509 -inform pem -pubkey`
+`keytool -list -rfc --keystore authenticationServer.jks | openssl x509 -inform pem -pubkey`
 
 
 
 __Generating session token__
 
-`curl -u client1ResourceId: http://localhost:8091/authorization-server/oauth/token -d "grant_type=password&username=admin&password=s3cr3t"`
+`curl -u client1ResourceId: http://localhost:8091/authentication-server/oauth/token -d "grant_type=password&username=admin&password=s3cr3t"`
 
 Expected response
 
